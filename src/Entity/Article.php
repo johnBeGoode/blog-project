@@ -25,7 +25,7 @@ class Article
     private $created_at;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private $Updated_at;
+    private $updated_at;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $image;
@@ -59,9 +59,9 @@ class Article
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable|string
     {
-        return $this->created_at;
+        return $this->created_at->format('d-m-Y');
     }
 
     public function setCreatedAt(\DateTimeImmutable $created_at): self
@@ -71,14 +71,14 @@ class Article
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): \DateTimeImmutable|string
     {
-        return $this->Updated_at;
+        return $this->updated_at->format('d-m-Y');
     }
 
-    public function setUpdatedAt(?\DateTimeImmutable $Updated_at): self
+    public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
-        $this->Updated_at = $Updated_at;
+        $this->updated_at = $updated_at;
 
         return $this;
     }
@@ -101,8 +101,7 @@ class Article
     {
         if ($this->getCreatedAt() === null) {
             $this->setCreatedAt(new DateTimeImmutable());
-        } else {
-            $this->setUpdatedAt(new DateTimeImmutable());
-        }
+        } 
+        $this->setUpdatedAt(new DateTimeImmutable());
     }
 }

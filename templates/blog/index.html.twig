@@ -1,20 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BlogController!{% endblock %}
+{% block title %}Les meilleurs articles se trouvent sur ce blog{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/symfony/blog-project/src/Controller/BlogController.php'|file_link(0) }}">src/Controller/BlogController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/symfony/blog-project/templates/blog/index.html.twig'|file_link(0) }}">templates/blog/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="row">
+        {% for article in articles %}
+            <div class="col-md-4">
+                <article class="mt-5 bg-light rounded border">
+                   <div>
+                        <img src="{{ asset('images/' ~ article.image) }}" alt="image-par-défaut">
+                   </div>
+                  <div class="p-3">
+                    <a href="{{ path('app_show_article', {id: article.id}) }}"><h2 class="mt-2">{{ article.title }}</h2></a>
+                    <div>{{ article.content|u.truncate(150, ' ...') }}</div>
+                    <a href="">Lire la suite</a>         
+                  </div>
+                </article>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+ {% block body %}
+    <article class="mt-5">
+        <div>
+            <img src="{{ asset('images/' ~ article.image) }}" alt="image-par-défaut">
+        </div>
+        <p class="text-muted fs-6 mt-3">Crée le {{ article.createdAt }}</p>
+        <h2 class="mt-4">{{ article.title }}</h2>
+        <div>{{ article.content }}</div>
+    </article>
+    <a href="{{ path('app_home') }}">Retour</a>
+ {% endblock %}
