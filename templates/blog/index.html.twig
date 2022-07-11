@@ -19,10 +19,10 @@
                    <div>
                         <img src="{{ asset('images/' ~ article.image) }}" alt="image-par-défaut">
                    </div>
-                  <div class="p-3">
-                    <a href="{{ path('app_show_article', {id: article.id}) }}"><h2 class="mt-2">{{ article.title }}</h2></a>
-                    <div>{{ article.content|u.truncate(150, ' ...') }}</div>
-                    <a href="">Lire la suite</a>         
+                    <div class="p-3">
+                        <a href="{{ path('app_show_article', {id: article.id}) }}"><h2 class="mt-2">{{ article.title }}</h2></a>
+                        <div>{{ article.content|u.truncate(150, ' ...') }}</div>
+                        <a href="">Lire la suite</a>         
                   </div>
                 </article>
             </div>

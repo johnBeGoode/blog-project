@@ -1,0 +1,11 @@
+.alert {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+}
+
+.alert.alert-success {
+    background-color: rgb(20, 176, 20);
+}
