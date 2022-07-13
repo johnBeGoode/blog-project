@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime_immutable', options:['default' => 'CURRENT_TIMESTAMP'])]
     private $created_at;
 
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private $updated_at;
 
     public function getId(): ?int
@@ -147,9 +147,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable|string
     {
-        return $this->created_at;
+        return $this->created_at->format('d-m-Y');
     }
 
     public function setCreatedAt(\DateTimeImmutable $created_at): self
@@ -159,9 +159,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): \DateTimeImmutable|string
     {
-        return $this->updated_at;
+        return $this->updated_at->format('d-m-Y');
     }
 
     public function setUpdatedAt(\DateTimeImmutable $updated_at): self
