@@ -53,7 +53,7 @@
                     <div class="p-3">
                         <a href="{{ path('app_show_article', {id: article.id}) }}"><h2 class="mt-2">{{ article.title }}</h2></a>
                         <div>{{ article.content|u.truncate(150, ' ...') }}</div>
-                        <a href="">Lire la suite</a>         
+                        <a href="{{ path('app_show_article', {id: article.id}) }}" class="btn btn-primary mt-3">Lire la suite</a>         
                   </div>
                 </article>
             </div>
