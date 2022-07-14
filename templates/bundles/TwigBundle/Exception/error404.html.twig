@@ -3,9 +3,12 @@
 {% block title 'Page not found - Error 404' %}
 
 {% block body %}
-    <h1>Erreur 404 - Page introuvable</h1>
+    <h1 class="text-warning">Erreur 404 - Page introuvable</h1>
 
-    <p>
-        Désolé mais la page que vous avez demandée n'existe pas ou plus. Vérifiez l'adresse que vous avez saisie. <br> <a href="{{ path('app_home') }}">Retourner sur la page d'accueil</a>.
-    </p>
+    <p class="text-muted">
+        Désolé mais la page que vous avez demandée n'existe pas ou plus. Vérifiez l'adresse que vous avez saisie. 
+    </p> 
+        
+    <a href="{{ path('app_home') }}" class="btn btn-warning mt-3">Retourner sur la page d'accueil</a>
+
 {% endblock %}
