@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\ArticleLike;
 use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Repository\ArticleLikeRepository;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,5 +48,46 @@ class BlogController extends AbstractController
             'article' => $article,
             'form' => $form->createView()
         ]);
+    }
+
+
+    #[Route('/article/{id}/like', name: 'article_like')]
+    public function like(Article $article, EntityManagerInterface $manager, ArticleLikeRepository $likeRepo): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->json([
+                'code' => 403, 
+                'message' => 'Unauthorized : Vous n\'êtes pas connecté!'
+            ], 403);
+        }
+
+        if ($article->isLikedByUser($user)) {
+            $like = $likeRepo->findOneBy(['article' => $article, 'user' => $user]);
+            $manager->remove($like);
+            $manager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message' => 'Like bien supprimé',
+                'likes' => $likeRepo->count(['article' => $article])
+            ], 200);
+        } else {
+            $like = new ArticleLike();
+            $like->setArticle($article)
+                ->setUser($user);
+            $manager->persist($like);
+            $manager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message' => 'Like bien ajouté',
+                'likes' => $likeRepo->count(['article' => $article])
+            ], 200);
+        }
+
+
+        return $this->json(['code' => 200, 'message' => 'Tout fonctionne bien'], 200);
     }
 }
