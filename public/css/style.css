@@ -7,5 +7,9 @@
 }
 
 .alert.alert-success {
-    background-color: rgb(20, 176, 20);
+    background-color: rgb(126, 248, 126);
+}
+
+footer {
+    color: white;
 }

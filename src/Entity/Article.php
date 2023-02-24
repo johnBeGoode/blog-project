@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use DateTimeImmutable;
+use App\Entity\Traits\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,6 +12,8 @@ use App\Repository\ArticleRepository;
 #[ORM\HasLifecycleCallbacks]
 class Article
 {
+    use Timestampable;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -22,12 +24,6 @@ class Article
 
     #[ORM\Column(type: 'text')]
     private $content;
-
-    #[ORM\Column(type: 'datetime_immutable', options:['default' => 'CURRENT_TIMESTAMP'])]
-    private $created_at;
-
-    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private $updated_at;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $image;
@@ -73,30 +69,6 @@ class Article
         return $this;
     }
 
-    public function getCreatedAt(): \DateTimeImmutable|string
-    {
-        return $this->created_at->format('d-m-Y');
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): \DateTimeImmutable|string
-    {
-        return $this->updated_at->format('d-m-Y');
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
-    {
-        $this->updated_at = $updated_at;
-
-        return $this;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -107,16 +79,6 @@ class Article
         $this->image = $image;
 
         return $this;
-    }
-
-    #[ORM\PrePersist]
-    #[ORM\PreUpdate]
-    public function updatedTimestamps() 
-    {
-        if ($this->getCreatedAt() === null) {
-            $this->setCreatedAt(new DateTimeImmutable());
-        } 
-        $this->setUpdatedAt(new DateTimeImmutable());
     }
 
     public function getCategory(): ?Category
@@ -159,5 +121,10 @@ class Article
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }

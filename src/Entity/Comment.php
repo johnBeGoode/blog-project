@@ -2,12 +2,16 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\Timestampable;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Comment
 {
+    use Timestampable;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -15,9 +19,6 @@ class Comment
 
     #[ORM\Column(type: 'text')]
     private $content;
-
-    #[ORM\Column(type: 'datetime_immutable')]
-    private $created_at;
 
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]

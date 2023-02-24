@@ -7,8 +7,31 @@
         <div>
             <img src="{{ asset('images/' ~ article.image) }}" alt="image-par-défaut">
         </div>
-        <p class="text-muted fs-6 mt-3">Crée le {{ article.createdAt }}</p>
+        <p class="text-muted fs-6 mt-3">Crée le {{ article.createdAt | date() }}</p>
         <h2 class="mt-4">{{ article.title }}</h2>
         <div>{{ article.content }}</div>
     </article>
+
+    <section class="comments mt-5">
+        <h2> {{ article.comments | length }} commentaires :</h2>
+        {% for comment in article.comments %}
+            <div class="comment mb-3">
+                <div class="row">
+                    <span class="fw-bold">{{ comment.user }}</span>
+                    <small class="text-muted">{{ comment.createdAt | date() }}</small>
+                    <p>{{ comment.content }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+
+    <section>
+        {% if app.user %}
+            <h3>Ajouter un commentaire :</h3>
+            {{ form_start(form) }}
+                {{ form_row(form.content) }}
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            {{ form_end(form) }}
+        {% endif %}
+    </section>
  {% endblock %}
