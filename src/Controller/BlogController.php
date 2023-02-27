@@ -87,7 +87,6 @@ class BlogController extends AbstractController
             ], 200);
         }
 
-
         return $this->json(['code' => 200, 'message' => 'Tout fonctionne bien'], 200);
     }
 }
