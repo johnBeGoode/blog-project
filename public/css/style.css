@@ -7,7 +7,29 @@
 }
 
 .alert.alert-success {
-    background-color: rgb(126, 248, 126);
+    background-color: rgb(150, 253, 150);
+}
+
+a.js-like {
+    text-decoration: none;
+    position: relative;
+    left: 90px;
+    top: 10px;
+}
+
+a.js-like:hover {
+    color: var(--bs-link-color);
+}
+
+span.js-label {
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: rgb(235, 235, 236);
+    font-weight: bold;
+}
+
+.cross-close {
+    float: right;
 }
 
 footer {

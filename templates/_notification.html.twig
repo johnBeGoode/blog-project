@@ -1,8 +1,9 @@
 {# read and display several types of flash messages #}
-{% for type, messages in app.flashes(['success', 'warning']) %}
+{% for label, messages in app.flashes(['success', 'warning']) %}
     {% for message in messages %}
-        <div class="alert alert-{{ type }}" role="alert">
+        <div class="alert alert-{{ label }} fade show" role="alert">
             {{ message }}
+            <button type="button" class="btn-close cross-close" aria-label="Close" data-bs-dismiss="alert"></button>
         </div>
     {% endfor %}
 {% endfor %}

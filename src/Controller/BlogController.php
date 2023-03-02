@@ -71,6 +71,7 @@ class BlogController extends AbstractController
             return $this->json([
                 'code' => 200,
                 'message' => 'Like bien supprimé',
+                'label' => 'J\'aime',
                 'likes' => $likeRepo->count(['article' => $article])
             ], 200);
         } else {
@@ -83,10 +84,11 @@ class BlogController extends AbstractController
             return $this->json([
                 'code' => 200,
                 'message' => 'Like bien ajouté',
+                'label' => 'Je n\'aime plus',
                 'likes' => $likeRepo->count(['article' => $article])
             ], 200);
         }
 
-        return $this->json(['code' => 200, 'message' => 'Tout fonctionne bien'], 200);
+        // return $this->json(['code' => 200, 'message' => 'Tout fonctionne bien'], 200);
     }
 }
