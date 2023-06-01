@@ -54,23 +54,27 @@
                         <a href="{{ path('app_show_article', {id: article.id}) }}"><h2 class="mt-2">{{ article.title }}</h2></a>
                         <div>{{ article.content|u.truncate(150, ' ...') }}</div>
                         <a href="{{ path('app_show_article', {id: article.id}) }}" class="btn btn-primary mt-3">Lire la suite</a>
-                        <a href="{{ path('article_like', {id: article.id}) }}" class="js-like">
-                            {% if app.user and article.isLikedByUser(app.user) %}
-                                <i class="fas fa-thumbs-up"></i>
-                            {% else %}
-                                <i class="far fa-thumbs-up"></i>
-                            {% endif %}
-                            <span class="js-likes">{{ article.likes | length }}</span>
-                            <span class="js-label">
-                                {% if not app.user %}
-                                    {# Pas de label #}
-                                {% elseif app.user and article.isLikedByUser(app.user) %}
-                                    je n'aime plus
+                        {% if not app.user %}
+                            <div class="float-end">
+                                <span class="js-likes">{{ article.likes | length }}</span> j'aime
+                            </div>
+                        {% else %}
+                            <a href="{{ path('article_like', {id: article.id}) }}" class="js-like">
+                                {% if app.user and article.isLikedByUser(app.user) %}
+                                    <i class="fas fa-thumbs-up"></i>
+                                    <span class="js-likes">{{ article.likes | length }}</span>
+                                    <span class="js-label">
+                                        je n'aime plus
+                                    </span>
                                 {% else %}
-                                    j'aime
-                                {% endif %}
-                            </span>
-                        </a>         
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span class="js-likes">{{ article.likes | length }}</span>
+                                    <span class="js-label">
+                                        j'aime
+                                    </span>
+                                {% endif %} 
+                            </a>
+                        {% endif %}       
                   </div>
                 </article>
             </div>

@@ -9,7 +9,7 @@ trait Timestampable {
     #[ORM\Column(type: 'datetime_immutable', options:['default' => 'CURRENT_TIMESTAMP'])]
     private $created_at;
 
-    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    #[ORM\Column(type: 'datetime_immutable', nullable: true, options:['default' => 'CURRENT_TIMESTAMP'])]
     private $updated_at;
 
 
