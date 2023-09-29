@@ -14,7 +14,7 @@ class SearchArticleController extends AbstractController
     public function index(ArticleRepository $articleRepository, Request $request): Response
     {
         $search = $request->request->get('your-search');
-        $articlesResult = $articleRepository->findByTitle($search);
+        $articlesResult = $articleRepository->findByTitleOrContent($search);
         
         return $this->render('search_article/index.html.twig', [
             'articlesResult' => $articlesResult,

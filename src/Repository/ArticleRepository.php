@@ -42,11 +42,12 @@ class ArticleRepository extends ServiceEntityRepository
    /**
     * @return Article[] Returns an array of Article objects
     */
-   public function findByTitle($value): array
+   public function findByTitleOrContent($value): array
    {
        return $this->createQueryBuilder('a')
-           ->andWhere('a.title = :val')
-           ->setParameter('val', $value)
+           ->where('a.title LIKE :val')
+           ->orWhere('a.content LIKE :val')
+           ->setParameter('val', '%'.$value.'%')
            ->orderBy('a.id', 'ASC')
            ->setMaxResults(10)
            ->getQuery()
