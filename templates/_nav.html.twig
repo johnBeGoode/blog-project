@@ -26,8 +26,13 @@
 					<a class="nav-link" aria-current="page" href="{{ path('app_admin') }}">Admin</a>
 				</li>
 			</ul>
+<<<<<<< HEAD
 			<form class="d-flex" role="search">
 				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+=======
+			<form class="d-flex" role="search" method="post" action="{{ path('app_search_article') }}">
+				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="your-search">
+>>>>>>> search-bar
 				<button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
 		</div>
